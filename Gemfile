@@ -40,6 +40,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
 gem 'simple_form'
 gem 'bootstrap', '~> 4.1.3'
+gem 'devise-bootstrap-views', '~> 1.0'
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'kaminari'
