@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users
-  get 'home/index'
+  resources :users do
+    resources :tweets
+  end
 
-  # authenticated :user do
-  #   root to: 'users#show', as: :user_root
-  # end
+  get 'home/index'
   root 'home#index'
 
   if Rails.env.development?
