@@ -1,14 +1,27 @@
 .form-inline
-  %h1= fa_icon "twitter 2x", text: "#{@user.name}"
+  %h1= fa_icon "twitter 2x", text: "@#{@user.name}"
+
+.p-3
+  - if current_page?(@current_user)
+    = render 'tweets/form'
 
 %ul.nav.nav-tabs
   %li.nav-item
-    %a.nav-link{"data-toggle" => "tab", :href => "#timeline-tab"} タイムライン
-  %li.nav-item
-    %a.nav-link{"data-toggle" => "tab", :href => "#users-tab"} おすすめユーザー
+    %a.nav-link{"data-toggle" => "tab", :href => "#tweets-tab"} ツイート
+  - if current_page?(@current_user)
+    %li.nav-item
+      %a.nav-link{"data-toggle" => "tab", :href => "#users-tab"} おすすめユーザー
 
 .tab-content
-  #timeline-tab.tab-pane.active
-    %span.fa-2x= fa_icon "twitter", text: "タイムライン"
+  #tweets-tab.tab-pane.active
+    - @user.tweets.each do |tweet|
+      .p-1
+        .card
+          .card-header
+            #{tweet.created_at}
+          .card-body
+            #{tweet.content}
+          .card-footer.bg-white
+            = button_to '開く', [@user, tweet], method: :get, class: "btn btn-outline-primary btn-sm"
   #users-tab.tab-pane
     %span.fa-2x= fa_icon "twitter", text: "おすすめユーザー"
