@@ -1,9 +1,14 @@
-%p#notice= notice
+.form-inline
+  %h1= fa_icon "twitter 2x", text: "#{@user.name}"
 
-%p
-  %b Name:
-  = @user.name
+%ul.nav.nav-tabs
+  %li.nav-item
+    %a.nav-link{"data-toggle" => "tab", :href => "#timeline-tab"} タイムライン
+  %li.nav-item
+    %a.nav-link{"data-toggle" => "tab", :href => "#users-tab"} おすすめユーザー
 
-= link_to 'Edit', edit_user_path(@user)
-\|
-= link_to 'Back', users_path
+.tab-content
+  #timeline-tab.tab-pane.active
+    %span.fa-2x= fa_icon "twitter", text: "タイムライン"
+  #users-tab.tab-pane
+    %span.fa-2x= fa_icon "twitter", text: "おすすめユーザー"

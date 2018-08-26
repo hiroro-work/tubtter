@@ -113,6 +113,8 @@ GEM
       factory_bot (~> 4.11.0)
       railties (>= 3.0.0)
     ffi (1.9.25)
+    font-awesome-rails (4.7.0.4)
+      railties (>= 3.2, < 6.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     haml (5.0.4)
@@ -334,6 +336,7 @@ DEPENDENCIES
   devise
   devise-bootstrap-views (~> 1.0)
   factory_bot_rails
+  font-awesome-rails
   haml-rails
   hirb
   hirb-unicode

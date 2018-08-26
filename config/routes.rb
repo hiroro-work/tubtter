@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :users
   get 'home/index'
 
+  # authenticated :user do
+  #   root to: 'users#show', as: :user_root
+  # end
   root 'home#index'
 
   if Rails.env.development?

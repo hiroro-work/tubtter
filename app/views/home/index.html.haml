@@ -1,2 +1,7 @@
-%h1 Home#index
-%p Find me in app/views/home/index.html.haml
+%h1= fa_icon "twitter 2x", text: "Tubtter"
+
+.p-3
+  %p Tubtterをはじめよう
+  .form-inline
+    = button_to 'ログイン', new_user_session_path, class: "btn btn-outline-dark"
+    = button_to 'アカウント作成', new_user_registration_path, method: :get, class: "btn btn-outline-dark"
