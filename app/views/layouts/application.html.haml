@@ -10,23 +10,20 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    %nav.navbar.fixed-top.navbar-light.bg-light
-      %a.navbar-brand Tubtter
+    %nav.navbar.fixed-top.navbar-dark.bg-dark
+      %a.navbar-brand.text-light= fa_icon "twitter 2x", text: "Tubtter"
       - if signed_in?
         .form-inline
-          = button_to 'ホーム', users_path, class: "btn btn-outline-dark"
-          = button_to 'ログアウト', destroy_user_session_path, method: :delete, class: "btn btn-outline-dark"
+          %a.navbar-brand.text-light @#{@current_user.name}
+          = button_to 'ホーム', users_path, class: "btn btn-outline-light"
+          = button_to 'アカウント', edit_user_registration_path, method: :get, class: "btn btn-outline-light"
+          = button_to 'ログアウト', destroy_user_session_path, method: :delete, class: "btn btn-outline-light"
 
     %p.notice= notice
     %p.alert= alert
 
     .pt-3.pr-3.pb-5.pl-3
       = yield
-
-    %nav.navbar.fixed-bottom.navbar-light.bg-light
-      = fa_icon "twitter"
-      - if signed_in?
-        = button_to 'アカウント削除', user_registration_path, method: :delete, class: "btn btn-outline-secondary btn-sm"
 
     %script{:crossorigin => "anonymous", :integrity => "sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo", :src => "https://code.jquery.com/jquery-3.3.1.slim.min.js"}
     %script{:crossorigin => "anonymous", :integrity => "sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49", :src => "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"}

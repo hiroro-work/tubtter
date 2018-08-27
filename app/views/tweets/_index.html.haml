@@ -1,0 +1,11 @@
+.tweets
+  - tweets.each do |tweet|
+    .p-1
+      .card
+        .card-header
+          #{tweet.created_at}
+        .card-body
+          #{tweet.content}
+        .card-footer.bg-white
+          = button_to '開く', [@user, tweet], method: :get, class: "btn btn-outline-primary btn-sm"
+  = paginate tweets

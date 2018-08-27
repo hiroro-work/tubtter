@@ -1,0 +1,9 @@
+- @users.each do |user|
+  .p-1
+    .card
+      .card-header
+        #{user.name}
+      .card-body
+        #{user.name}
+      .card-footer.bg-white
+        = button_to '開く', user_path, method: :get, class: "btn btn-outline-primary btn-sm"
