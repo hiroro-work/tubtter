@@ -1,6 +1,5 @@
 %h1= fa_icon "twitter 2x", text: "Tubtter"
-
 %p Tubtterをはじめよう
 .form-inline
-  = button_to 'ログイン', new_user_session_path, class: "btn btn-outline-dark"
+  = button_to 'ログイン', new_user_session_path, method: :get, class: "btn btn-outline-dark"
   = button_to 'アカウント作成', new_user_registration_path, method: :get, class: "btn btn-outline-dark"

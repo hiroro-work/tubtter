@@ -10,15 +10,15 @@ class UsersController < ApplicationController
   end
 
   def followings
-    @users = User.all
+    @users = User.all.page(params[:page])
   end
 
   def followers
-    @users = User.all
+    @users = User.all.page(params[:page])
   end
 
   def allusers
-    @users = User.all
+    @users = User.all.page(params[:page])
   end
 
   # def new

@@ -1,4 +1,5 @@
-- if current_user?
-  %nav.navbar.fixed-bottom.navbar-light.bg-light
-    = fa_icon "twitter"
+%nav.navbar.fixed-bottom.navbar-light.bg-light
+  .form-inline
+    = fa_icon "twitter 2x"
+  - if current_user?
     = button_to 'アカウント削除', user_registration_path, method: :delete, class: "btn btn-outline-secondary btn-sm"

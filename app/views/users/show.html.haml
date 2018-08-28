@@ -1,3 +1,4 @@
-= render "header"
-= render "tweets/index", { tweets: @user.tweets.page(params[:page]).per(5) }
--# = render "footer"
+- if current_page?(@current_user)
+  .p-3
+    = render "tweets/form"
+= render "tweets/index", { tweets: @user.tweets.reverse_order.page(params[:page]) }
