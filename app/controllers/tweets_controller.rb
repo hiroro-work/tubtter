@@ -53,8 +53,8 @@ class TweetsController < ApplicationController
     end
 
     def require_my_tweet
-      unless @tweet.user == current_user
-        redirect_to user_tweet_path, alert: "It is not your tweet!"
+      unless @user == current_user
+        redirect_to [@user, @tweet], alert: "It is not your tweet!"
       end
     end
 
