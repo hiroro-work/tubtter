@@ -29,7 +29,6 @@ class TweetsController < ApplicationController
     respond_to do |format|
       if @tweet.update(tweet_params)
         format.html { redirect_to [current_user, @tweet], notice: 'Tweet was successfully updated.' }
-        # format.html { redirect_to user_tweet_path, notice: 'Tweet was successfully updated.' }
       else
         format.html { render :edit }
       end
