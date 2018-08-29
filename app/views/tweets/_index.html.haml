@@ -7,5 +7,5 @@
         .card-body
           #{tweet.content}
         .card-footer.bg-white
-          = button_to '開く', [@user, tweet], method: :get, class: "btn btn-outline-primary btn-sm"
+          = button_to "開く", [@user, tweet], method: :get, class: "btn btn-outline-primary btn-sm"
   = paginate tweets

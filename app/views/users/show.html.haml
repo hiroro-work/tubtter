@@ -1,4 +1,4 @@
-- if current_page?(@current_user)
+- if current_page?(current_user)
   .p-3
     = render "tweets/form"
 = render "tweets/index", { tweets: @user.tweets.reverse_order.page(params[:page]) }
