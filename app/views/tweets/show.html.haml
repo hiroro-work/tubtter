@@ -1,10 +1,10 @@
-.card
-  .card-header
-    #{@tweet.created_at}に#{@tweet.user.name}がツイート
+.card.border-dark
+  %h3.card-header
+    #{@tweet.user.name} が #{@tweet.created_at} にツイート
   .card-body
     #{@tweet.content}
-  .card-footer.bg-white
-    .form-inline
-      - if current_user?(@user)
+  .card-footer
+    - if current_user?(@user)
+      .form-inline
         = button_to "更新", edit_user_tweet_path, method: :get, class: "btn btn-outline-primary btn-sm"
         = button_to "削除", user_tweet_path, method: :delete, class: "btn btn-outline-primary btn-sm"
