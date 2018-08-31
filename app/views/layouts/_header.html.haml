@@ -17,9 +17,10 @@
         = button_to "フォロワー", followers_user_path(@user), method: :get, class: "btn btn-outline-dark"
         - if current_user?(@user)
           = button_to "おすすめユーザー", allusers_user_path(@user), method: :get, class: "btn btn-outline-dark"
-      - if current_user.following?(@user)
-        = button_to "フォロー解除", unfollow_user_path(@user), method: :patch, class: "btn btn-outline-dark"
-      - else
-        = button_to "フォローする", follow_user_path(@user), method: :patch, class: "btn btn-outline-dark"
+      - unless current_user?(@user)
+        - if current_user.following?(@user)
+          = button_to "フォロー解除", unfollow_user_path(@user), method: :patch, class: "btn btn-outline-dark"
+        - else
+          = button_to "フォローする", follow_user_path(@user), method: :patch, class: "btn btn-outline-dark"
     - else
       %a.navbar-brand 「いま」起きていることを見つけよう
