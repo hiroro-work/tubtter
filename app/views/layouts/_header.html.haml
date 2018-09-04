@@ -1,0 +1,26 @@
+.application-header.fixed-top
+  %nav.navbar.navbar-dark.bg-dark
+    %a.navbar-brand.text-light= fa_icon "twitter 2x", text: "Tubtter"
+    - if signed_in?
+      .form-inline
+        %a.navbar-brand.text-light @#{current_user.name}
+        = button_to "ホーム", current_user, method: :get, class: "btn btn-outline-light"
+        = button_to "アカウント", edit_user_registration_path, method: :get, class: "btn btn-outline-light"
+        = button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-light"
+
+  %nav.navbar.navbar-light.bg-light
+    - if signed_in?
+      .form-inline
+        %a.navbar-brand #{@user.name}のホーム
+        = button_to "ツイート", @user, method: :get, class: "btn btn-outline-dark"
+        = button_to "フォロー中", followings_user_path(@user), method: :get, class: "btn btn-outline-dark"
+        = button_to "フォロワー", followers_user_path(@user), method: :get, class: "btn btn-outline-dark"
+        - if current_user?(@user)
+          = button_to "おすすめユーザー", allusers_user_path(@user), method: :get, class: "btn btn-outline-dark"
+      - unless current_user?(@user)
+        - if current_user.following?(@user)
+          = button_to "フォロー解除", unfollow_user_path(@user), method: :patch, class: "btn btn-outline-dark"
+        - else
+          = button_to "フォローする", follow_user_path(@user), method: :patch, class: "btn btn-outline-dark"
+    - else
+      %a.navbar-brand 「いま」起きていることを見つけよう
