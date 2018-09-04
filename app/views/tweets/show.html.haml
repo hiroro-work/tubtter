@@ -1,5 +1,5 @@
 .card.border-dark
-  %h3.card-header #{@tweet.user.name} が #{time_ago_in_words(@tweet.created_at, include_seconds: true)} 前にツイート
+  %h3.card-header #{@tweet.user.name} が #{time_ago_in_words(@tweet.created_at, include_seconds: true)}前にツイート
   .card-body= simple_format(@tweet.content)
   .card-footer
     - if current_user?(@user)

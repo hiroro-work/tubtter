@@ -41,13 +41,14 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 gem 'simple_form'
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 gem 'bootstrap', '~> 4.1.3'
 gem 'devise-bootstrap-views', '~> 1.0'
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'kaminari'
 gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
+gem 'pundit'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

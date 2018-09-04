@@ -1,7 +1,6 @@
 class TweetsController < ApplicationController
   before_action :authenticate_user!, :set_user
   before_action :set_tweet, only: %i[show edit update destroy]
-  before_action :require_my_tweet, only: %i[edit update destroy]
 
   def show
   end
@@ -43,12 +42,7 @@ class TweetsController < ApplicationController
 
     def set_tweet
       @tweet = @user.tweets.find(params[:id])
-    end
-
-    def require_my_tweet
-      unless @user == current_user
-        redirect_to user_tweet_path(@user, @tweet), alert: 'あなたのツイートではありません！'
-      end
+      authorize @tweet
     end
 
     def tweet_params

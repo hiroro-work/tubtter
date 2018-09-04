@@ -2,7 +2,7 @@
   - tweets.each do |tweet|
     .p-1
       .card.border-dark
-        .card-header #{time_ago_in_words(tweet.created_at, include_seconds: true)} 前
+        .card-header #{time_ago_in_words(tweet.created_at, include_seconds: true)}前
         .card-body= simple_format(tweet.content)
         .card-footer= button_to '開く', user_tweet_path(@user, tweet), method: :get, class: 'btn btn-outline-primary btn-sm'
   = paginate tweets
