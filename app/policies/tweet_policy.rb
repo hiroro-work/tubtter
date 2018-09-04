@@ -3,14 +3,6 @@ class TweetPolicy < ApplicationPolicy
     true
   end
 
-  def new?
-    create?
-  end
-
-  def edit?
-    update?
-  end
-
   def create?
     my_record?
   end
@@ -22,10 +14,4 @@ class TweetPolicy < ApplicationPolicy
   def destroy?
     my_record?
   end
-
-  private
-
-    def my_record?
-      record.user == user
-    end
 end

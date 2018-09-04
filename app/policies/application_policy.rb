@@ -46,4 +46,10 @@ class ApplicationPolicy
       scope.all
     end
   end
+
+  private
+
+    def my_record?
+      record.user == user
+    end
 end
