@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       patch :follow, :unfollow
     end
     resources :tweets, only: %i[show new edit create update destroy]
+    resources :replies, only: %i[show new edit create update destroy]
   end
 
   get 'home/index'
