@@ -6,11 +6,11 @@ class UsersController < ApplicationController
   end
 
   def followings
-    @users = @user.all_following
+    @users = Kaminari.paginate_array(@user.all_following).page(params[:page])
   end
 
   def followers
-    @users = @user.followers
+    @users = Kaminari.paginate_array(@user.followers).page(params[:page])
   end
 
   def allusers

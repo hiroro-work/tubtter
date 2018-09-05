@@ -4,3 +4,4 @@
       .card.border-dark
         %h3.card-header= user.name
         %a{ href: user_path(user), method: :get }
+= paginate @users
