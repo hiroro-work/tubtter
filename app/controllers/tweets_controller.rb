@@ -3,6 +3,7 @@ class TweetsController < ApplicationController
   before_action :set_tweet, only: %i[show edit update destroy]
 
   def show
+    @reply = @tweet.replies.build
   end
 
   def new
@@ -23,7 +24,7 @@ class TweetsController < ApplicationController
 
   def update
     if @tweet.update(tweet_params)
-      redirect_to user_tweet_path(current_user, @tweet), notice: 'ツイートを更新しました。'
+      redirect_to user_tweet_url(current_user, @tweet), notice: 'ツイートを更新しました。'
     else
       render :edit
     end

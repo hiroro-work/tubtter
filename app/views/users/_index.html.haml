@@ -2,6 +2,6 @@
   .p-1
     .record
       .card.border-dark
-        %h3.card-header= user.name
+        %h4.card-header= user.name
         %a{ href: user_path(user), method: :get }
 = paginate @users

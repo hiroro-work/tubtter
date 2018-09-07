@@ -1,7 +1,5 @@
-%h1 Editing reply
-
-= render 'form'
-
-= link_to 'Show', @reply
-\|
-= link_to 'Back', replies_path
+.card.border-dark
+  %h4.card-header #{@tweet.user.name} ・ #{time_ago_in_words(@tweet.created_at, include_seconds: true)}前
+  .card-body= simple_format(@tweet.content)
+.p-3
+  = render 'form'

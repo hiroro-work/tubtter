@@ -1,15 +1,10 @@
-%p#notice= notice
-
-%p
-  %b User:
-  = @reply.user
-%p
-  %b Tweet:
-  = @reply.tweet
-%p
-  %b Content:
-  = @reply.content
-
-= link_to 'Edit', edit_reply_path(@reply)
-\|
-= link_to 'Back', replies_path
+.pl-5.pb-1
+  .card.border-dark
+    -if @reply.tweet
+      %h4.card-header #{@reply.tweet.user.name} ・ #{time_ago_in_words(@reply.tweet.created_at, include_seconds: true)}前
+      .card-body= simple_format(@reply.tweet.content)
+.card.text-white.bg-secondary
+  .card-header
+    %h4 #{@reply.user.name} ・ #{time_ago_in_words(@reply.created_at, include_seconds: true)}前
+    返信先: #{@reply.tweet.user.name}
+  .card-body= simple_format(@reply.content)

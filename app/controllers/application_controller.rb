@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     end
 
     def user_not_authorized(exception)
-      flash[:alert] = "権限がありません。"
+      flash[:alert] = '権限がありません。'
       redirect_to(request.referrer || root_path)
     end
 end
