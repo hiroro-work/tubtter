@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @retweet.user
+%p
+  %b Tweet:
+  = @retweet.tweet
+
+= link_to 'Edit', edit_retweet_path(@retweet)
+\|
+= link_to 'Back', retweets_path

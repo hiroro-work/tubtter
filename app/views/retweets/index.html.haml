@@ -1,0 +1,23 @@
+%h1 Listing retweets
+
+%table
+  %thead
+    %tr
+      %th User
+      %th Tweet
+      %th
+      %th
+      %th
+
+  %tbody
+    - @retweets.each do |retweet|
+      %tr
+        %td= retweet.user
+        %td= retweet.tweet
+        %td= link_to 'Show', retweet
+        %td= link_to 'Edit', edit_retweet_path(retweet)
+        %td= link_to 'Destroy', retweet, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Retweet', new_retweet_path
