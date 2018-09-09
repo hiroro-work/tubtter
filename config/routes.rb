@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       patch :follow, :unfollow
     end
     resources :tweets, only: %i[show new edit create update destroy]
-    resources :replies, only: %i[show edit update destroy]
+    resources :replies, only: %i[index show edit update destroy]
   end
 
   resources :tweets do

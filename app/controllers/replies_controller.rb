@@ -1,7 +1,12 @@
 class RepliesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, :set_reply, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[index show edit update destroy]
+  before_action :set_reply, only: %i[show edit update destroy]
   before_action :set_tweet, only: %i[new create]
+
+  def index
+    @replies = @user.replies.reverse_order.page(params[:page])
+  end
 
   def show
   end

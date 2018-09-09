@@ -1,4 +1,4 @@
-.card.border-dark
+.tweet-card
   %h4.card-header #{@tweet.user.name} ・ #{time_ago_in_words(@tweet.created_at, include_seconds: true)}前に
   .card-body= simple_format(@tweet.content)
   .card-footer
@@ -6,7 +6,8 @@
       .form-inline
         = button_to '更新', edit_user_tweet_path, method: :get, class: 'btn btn-outline-primary btn-sm'
         = button_to '削除', user_tweet_path, method: :delete, class: 'btn btn-outline-primary btn-sm'
-.p-3
-  = render 'replies/form'
-.pl-4
+.padding-form
+  = simple_form_for [@tweet, @reply] do |f|
+    = render 'replies/form', f: f
+.padding-child-record
   = render 'replies/index', replies: @tweet.replies.reverse_order.page(params[:page])

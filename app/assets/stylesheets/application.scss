@@ -6,7 +6,24 @@
   padding: ($spacer * 8) ($spacer * 0.5) ($spacer * 3) ($spacer * 0.5);
 }
 
+.user-card {
+  @extend .card;
+  @extend .border-dark;
+}
+
+.tweet-card {
+  @extend .card;
+  @extend .border-dark;
+}
+
+.reply-card {
+  @extend .card;
+  @extend .border-dark;
+}
+
 .record {
+  @extend .m-1;
+
   position: relative;
 
   a {
@@ -21,4 +38,32 @@
     opacity: 0.6;
     transform: scale(1.01);
   }
+}
+
+.user-record {
+  @extend .user-card;
+  @extend .record;
+}
+
+.tweet-record {
+  @extend .tweet-card;
+  @extend .record;
+}
+
+.reply-record {
+  @extend .reply-card;
+  @extend .record;
+}
+
+.padding-form {
+  @extend .p-3;
+}
+
+.padding-child-record {
+  @extend .p-4;
+}
+
+.padding-parent-record {
+  @extend .pl-4;
+  @extend .pb-1;
 }

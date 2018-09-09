@@ -13,6 +13,7 @@
       .form-inline
         %a.navbar-brand #{@user.name}のホーム
         = button_to 'ツイート', @user, method: :get, class: 'btn btn-outline-dark'
+        = button_to 'リプライ', user_replies_path(@user), method: :get, class: 'btn btn-outline-dark'
         = button_to 'フォロー中', followings_user_path(@user), method: :get, class: 'btn btn-outline-dark'
         = button_to 'フォロワー', followers_user_path(@user), method: :get, class: 'btn btn-outline-dark'
         - if current_user?(@user)

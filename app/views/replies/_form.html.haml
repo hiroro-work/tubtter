@@ -1,10 +1,9 @@
-= simple_form_for [@tweet, @reply] do |f|
-  = f.error_notification
-  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+-# = simple_form_for [tweet, reply] do |f|
+= render 'share/form_error', f: f
 
-  .form-inputs
-    - if @reply.content
-      = f.input :content, label: false, default: "#{@reply.content}"
-    - else
-      = f.input :content, label: false, placeholder: '返信をツイート'
-  .form-actions= f.button :submit, '返信', class: 'btn btn-outline-dark'
+.form-inputs
+  - if @reply.content
+    = f.input :content, label: false, default: "#{@reply.content}"
+  - else
+    = f.input :content, label: false, placeholder: '返信をツイート'
+.form-actions= f.button :submit, '返信', class: 'btn btn-outline-dark'
