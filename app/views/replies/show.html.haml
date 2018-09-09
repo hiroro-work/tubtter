@@ -1,15 +1,14 @@
 .padding-parent-record
-  .tweet-card
-    -if @reply.tweet
-      %h4.card-header #{@reply.tweet.user.name} ・ #{time_ago_in_words(@reply.tweet.created_at, include_seconds: true)}前
-      .card-body= simple_format(@reply.tweet.content)
+  = render 'replies/parent_tweet'
 .reply-card
   .card-header
     %h4 #{@reply.user.name} ・ #{time_ago_in_words(@reply.created_at, include_seconds: true)}前
-    返信先: #{@reply.tweet.user.name}
+    - if @reply.tweet
+      返信先: #{@reply.tweet.user.name}
   .card-body= simple_format(@reply.content)
   .card-footer
     - if current_user?(@reply.user)
       .form-inline
-        = button_to '更新', edit_user_reply_path, method: :get, class: 'btn btn-outline-primary btn-sm'
+        - if @reply.tweet
+          = button_to '更新', edit_user_reply_path, method: :get, class: 'btn btn-outline-primary btn-sm'
         = button_to '削除', user_reply_path, method: :delete, class: 'btn btn-outline-primary btn-sm'

@@ -1,8 +1,8 @@
 class RepliesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_tweet, only: %i[new create]
   before_action :set_user, only: %i[index show edit update destroy]
   before_action :set_reply, only: %i[show edit update destroy]
-  before_action :set_tweet, only: %i[new create]
 
   def index
     @replies = @user.replies.reverse_order.page(params[:page])
@@ -23,7 +23,7 @@ class RepliesController < ApplicationController
     if @reply.save
       redirect_to user_reply_url(current_user, @reply), method: :get, notice: 'リプライしました。'
     else
-      redirect_to user_tweet_url(@user, @tweet)
+      redirect_to user_tweet_url(@tweet.user, @tweet)
     end
   end
 
@@ -42,6 +42,10 @@ class RepliesController < ApplicationController
 
   private
 
+    def set_tweet
+      @tweet = Tweet.find(params[:tweet_id])
+    end
+
     def set_user
       @user = User.find(params[:user_id])
     end
@@ -49,10 +53,6 @@ class RepliesController < ApplicationController
     def set_reply
       @reply = @user.replies.find(params[:id])
       authorize @reply
-    end
-
-    def set_tweet
-      @tweet = Tweet.find(params[:tweet_id])
     end
 
     def reply_params
