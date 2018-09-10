@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :tweets, dependent: :destroy
   has_many :replies, dependent: :destroy
+  has_many :retweets, dependent: :destroy
 
   validates :name, presence: true, uniqueness: { case_sensitive: :false }
 

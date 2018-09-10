@@ -1,4 +1,3 @@
 = render 'replies/parent_tweet'
 .padding-form
-  = simple_form_for [@reply.user, @reply] do |f|
-    = render 'replies/form', f: f
+  = render 'replies/form', tweet: @reply.tweet, reply: @reply
