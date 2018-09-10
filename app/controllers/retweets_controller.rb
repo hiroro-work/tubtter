@@ -1,8 +1,10 @@
 class RetweetsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_tweet, only: %i[new create]
-  before_action :set_user, only: %i[index show edit update destroy]
-  before_action :set_retweet, only: %i[show edit update destroy]
+  before_action :set_tweet, only: %i[new edit create update]
+  before_action :set_tweet_retweet, only: %i[edit update]
+  before_action :set_user, only: %i[index show destroy]
+  before_action :set_user_retweet, only: %i[show destroy]
+  before_action :authorize_retweet, only: %i[show edit update destroy]
 
   def index
     @retweets = @user.retweets.reverse_order.page(params[:page])
@@ -47,12 +49,19 @@ class RetweetsController < ApplicationController
       @tweet = Tweet.find(params[:tweet_id])
     end
 
+    def set_tweet_retweet
+      @retweet = @tweet.retweets.find(params[:id])
+    end
+
     def set_user
       @user = User.find(params[:user_id])
     end
 
-    def set_retweet
+    def set_user_retweet
       @retweet = @user.retweets.find(params[:id])
+    end
+
+    def authorize_retweet
       authorize @retweet
     end
 

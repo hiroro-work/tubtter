@@ -1,8 +1,10 @@
 class RepliesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_tweet, only: %i[new create]
-  before_action :set_user, only: %i[index show edit update destroy]
-  before_action :set_reply, only: %i[show edit update destroy]
+  before_action :set_tweet, only: %i[new edit create update]
+  before_action :set_tweet_reply, only: %i[edit update]
+  before_action :set_user, only: %i[index show destroy]
+  before_action :set_user_reply, only: %i[show destroy]
+  before_action :authorize_reply, only: %i[show edit update destroy]
 
   def index
     @replies = @user.replies.reverse_order.page(params[:page])
@@ -46,12 +48,19 @@ class RepliesController < ApplicationController
       @tweet = Tweet.find(params[:tweet_id])
     end
 
+    def set_tweet_reply
+      @reply = @tweet.replies.find(params[:id])
+    end
+
     def set_user
       @user = User.find(params[:user_id])
     end
 
-    def set_reply
+    def set_user_reply
       @reply = @user.replies.find(params[:id])
+    end
+
+    def authorize_reply
       authorize @reply
     end
 

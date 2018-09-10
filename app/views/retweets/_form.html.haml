@@ -1,8 +1,9 @@
-= render 'share/form_error', f: f
+= simple_form_for [tweet, retweet] do |f|
+  = render 'share/form_error', f: f
 
-.form-inputs
-  - if @retweet.content
-    = f.input :content, label: false, default: "#{@retweet.content}"
-  - else
-    = f.input :content, label: false, placeholder: 'コメント'
-.form-actions= f.button :submit, 'つぶやく', class: 'btn btn-outline-dark'
+  .form-inputs
+    - if retweet.content
+      = f.input :content, label: false, default: "#{retweet.content}"
+    - else
+      = f.input :content, label: false, placeholder: 'コメント'
+  .form-actions= f.button :submit, 'リツイート', class: 'btn btn-outline-dark'

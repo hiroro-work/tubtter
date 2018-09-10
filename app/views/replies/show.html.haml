@@ -10,5 +10,5 @@
     - if current_user?(@reply.user)
       .form-inline
         - if @reply.tweet
-          = button_to '更新', edit_user_reply_path, method: :get, class: 'btn btn-outline-dark btn-sm'
-        = button_to '削除', user_reply_path, method: :delete, class: 'btn btn-outline-dark btn-sm'
+          = button_to '更新', edit_tweet_reply_path(@reply.tweet, @reply), method: :get, class: 'btn btn-outline-dark btn-sm'
+        = button_to '削除', user_reply_path(@reply.user, @reply), method: :delete, class: 'btn btn-outline-dark btn-sm'

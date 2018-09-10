@@ -14,10 +14,9 @@
   .card-footer
     - if current_user?(@retweet.user)
       .form-inline
-        = button_to '更新', edit_user_retweet_path, method: :get, class: 'btn btn-outline-dark btn-sm'
-        = button_to '削除', user_retweet_path, method: :delete, class: 'btn btn-outline-dark btn-sm'
+        = button_to '更新', edit_tweet_retweet_path(@retweet.tweet, @retweet), method: :get, class: 'btn btn-outline-dark btn-sm'
+        = button_to '削除', user_retweet_path(@retweet.user, @retweet), method: :delete, class: 'btn btn-outline-dark btn-sm'
 .padding-form
-  = simple_form_for [@retweet.tweet, @reply] do |f|
-    = render 'replies/form', f: f
+  = render 'replies/form', tweet: @retweet.tweet, reply: @reply
 .padding-child-record
   = render 'replies/index', replies: @retweet.tweet.replies.reverse_order.page(params[:page])

@@ -6,5 +6,4 @@
     .card-body= simple_format(@retweet.tweet.content)
 
 .padding-form
-  = simple_form_for [@retweet.user, @retweet] do |f|
-    = render 'retweets/form', f: f
+  = render 'retweets/form', tweet: @retweet.tweet, retweet: @retweet
