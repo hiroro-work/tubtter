@@ -1,11 +1,8 @@
--# frozen_string_literal: true
-= simple_form_for(@retweet) do |f|
-  = f.error_notification
-  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+= render 'share/form_error', f: f
 
-  .form-inputs
-    = f.association :user
-    = f.association :tweet
-
-  .form-actions
-    = f.button :submit
+.form-inputs
+  - if @retweet.content
+    = f.input :content, label: false, default: "#{@retweet.content}"
+  - else
+    = f.input :content, label: false, placeholder: 'コメント'
+.form-actions= f.button :submit, 'つぶやく', class: 'btn btn-outline-dark'

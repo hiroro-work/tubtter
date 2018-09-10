@@ -1,23 +1,10 @@
-%h1 Listing retweets
-
-%table
-  %thead
-    %tr
-      %th User
-      %th Tweet
-      %th
-      %th
-      %th
-
-  %tbody
-    - @retweets.each do |retweet|
-      %tr
-        %td= retweet.user
-        %td= retweet.tweet
-        %td= link_to 'Show', retweet
-        %td= link_to 'Edit', edit_retweet_path(retweet)
-        %td= link_to 'Destroy', retweet, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Retweet', new_retweet_path
+%nav.navbar.navbar-light.bg-white
+  %a.navbar-brand リツイート
+- @retweets.each do |retweet|
+  .tweet-record
+    .card-header
+      #{retweet.user.name} さんがリツイート
+      %h4 #{retweet.tweet.user.name} ・ #{time_ago_in_words(retweet.tweet.created_at, include_seconds: true)}前
+    .card-body= simple_format(retweet.tweet.content)
+    %a{ href: user_retweet_path(retweet.user, retweet), method: :get }
+= paginate @retweets

@@ -1,8 +1,8 @@
-class ReplyPolicy < ApplicationPolicy
+class RetweetPolicy < ApplicationPolicy
   def index?
     true
   end
-  
+
   def show?
     true
   end

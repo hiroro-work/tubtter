@@ -21,7 +21,7 @@ class RepliesController < ApplicationController
   def create
     @reply = @tweet.replies.build(reply_params)
     if @reply.save
-      redirect_to user_reply_url(current_user, @reply), method: :get, notice: 'リプライしました。'
+      redirect_to user_reply_url(@reply.user, @reply), method: :get, notice: 'リプライしました。'
     else
       redirect_to user_tweet_url(@tweet.user, @tweet)
     end
@@ -29,7 +29,7 @@ class RepliesController < ApplicationController
 
   def update
     if @reply.update(reply_params)
-      redirect_to user_reply_url(current_user, @reply), method: :get, notice: 'リプライを更新しました。'
+      redirect_to user_reply_url(@reply.user, @reply), method: :get, notice: 'リプライを更新しました。'
     else
       render :edit
     end
@@ -37,7 +37,7 @@ class RepliesController < ApplicationController
 
   def destroy
     @reply.destroy
-    redirect_to user_replies_url(current_user), notice: 'リプライを削除しました。'
+    redirect_to user_replies_url(@reply.user), notice: 'リプライを削除しました。'
   end
 
   private
