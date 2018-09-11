@@ -26,7 +26,7 @@ class RetweetsController < ApplicationController
     if @retweet.save
       redirect_to user_retweet_url(@retweet.user, @retweet), method: :get, notice: 'リツイートしました。'
     else
-      redirect_to user_tweet_url(@tweet.user, @tweet)
+      redirect_to user_tweet_url(@tweet.user, @tweet), method: :get
     end
   end
 

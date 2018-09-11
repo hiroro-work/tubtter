@@ -25,7 +25,7 @@ class RepliesController < ApplicationController
     if @reply.save
       redirect_to user_reply_url(@reply.user, @reply), method: :get, notice: 'リプライしました。'
     else
-      redirect_to user_tweet_url(@tweet.user, @tweet)
+      redirect_to user_tweet_url(@tweet.user, @tweet), method: :get
     end
   end
 
