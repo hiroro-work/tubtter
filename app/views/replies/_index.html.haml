@@ -2,5 +2,5 @@
   .reply-record
     .card-header #{reply.user.name} ・ #{time_ago_in_words(reply.created_at, include_seconds: true)}前
     .card-body= simple_format(reply.content)
-    %a{ href: user_reply_path(reply.user, reply), method: :get }
+    %a{ href: user_reply_path(reply.user, reply), id: "#{reply.id}", method: :get }
 = paginate replies

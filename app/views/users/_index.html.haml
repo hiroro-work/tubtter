@@ -1,5 +1,5 @@
 - @users.each do |user|
   .user-record
     %h4.card-header= user.name
-    %a{ href: user_path(user), method: :get }
+    %a{ href: user_path(user), id: "#{user.id}", method: :get }
 = paginate @users
