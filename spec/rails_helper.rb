@@ -65,8 +65,8 @@ RSpec.configure do |config|
 
   config.before(:each) do |example|
     if example.metadata[:type] == :system
-      if example.metadata[:js]
-        driven_by :selenium_chrome_headless, screen_size: [1487, 866]
+      if example.metadata[:js] || ENV['SELENIUM']
+        driven_by :selenium, using: :headless_chrome, screen_size: [1600, 1200]
       else
         driven_by :rack_test
       end

@@ -20,6 +20,18 @@ RSpec.feature 'user#show', type: :system do
       end
     end
 
+    feature 'つぶやく', type: :system do
+      background do
+        click_on 'ツイート'
+      end
+
+      scenario 'つぶやく' do
+        fill_in 'tweet_content', with: 'はじめまして'
+        click_on 'つぶやく'
+        expect(page).to have_content 'つぶやきました。'
+      end
+    end
+
     feature 'おすすめユーザー', type: :system do
       scenario 'おすすめユーザーを表示する' do
         click_on 'おすすめユーザー'
