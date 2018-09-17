@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'Devises', type: :system do
-  let(:user) { create(:user, name: 'taro', email: 'taro@example.com') }
+  given(:user) { create(:user, name: 'taro', email: 'taro@example.com') }
 
   feature 'アカウント登録', type: :system do
     background do

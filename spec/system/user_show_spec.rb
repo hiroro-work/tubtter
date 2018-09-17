@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature 'user#show', type: :system do
-  let!(:taro) { create(:user, name: 'taro', email: 'taro@example.com') }
-  let!(:jiro) { create(:user, name: 'jiro', email: 'jiro@example.com') }
+  given!(:taro) { create(:user, name: 'taro', email: 'taro@example.com') }
+  given!(:jiro) { create(:user, name: 'jiro', email: 'jiro@example.com') }
 
   background do
     visit root_path
@@ -12,17 +12,22 @@ RSpec.feature 'user#show', type: :system do
     click_on 'ログイン'
   end
 
-  feature '自分のホーム画面', type: :system do
-    feature 'ツイート', type: :system do
+  context '自分のホーム画面' do
+    context 'ツイート' do
       scenario 'ツイート一覧を表示する' do
         click_on 'ツイート'
         expect(page).to have_button 'つぶやく'
       end
     end
 
-    feature 'つぶやく', type: :system do
+    context 'つぶやく' do
       background do
         click_on 'ツイート'
+      end
+
+      scenario 'content未入力だとつぶやけない' do
+        click_on 'つぶやく'
+        expect(page).to have_no_content 'つぶやきました。'
       end
 
       scenario 'つぶやく' do
@@ -32,7 +37,7 @@ RSpec.feature 'user#show', type: :system do
       end
     end
 
-    feature 'おすすめユーザー', type: :system do
+    context 'おすすめユーザー' do
       scenario 'おすすめユーザーを表示する' do
         click_on 'おすすめユーザー'
         expect(page).to have_content 'おすすめユーザー'
@@ -40,27 +45,27 @@ RSpec.feature 'user#show', type: :system do
     end
   end
 
-  feature '他ユーザーのホーム画面', type: :system do
+  context '他ユーザーのホーム画面' do
     background do
       click_on 'おすすめユーザー'
       page.find('a', id: "#{jiro.id}").click
     end
 
-    feature 'ツイート', type: :system do
+    context 'ツイート' do
       scenario 'ツイート一覧を表示する' do
         click_on 'ツイート'
         expect(page).to have_no_button 'つぶやく'
       end
     end
 
-    feature 'フォロー', type: :system do
+    context 'フォロー' do
       scenario 'フォローする' do
         click_on 'フォローする'
         expect(page).to have_content "#{jiro.name} をフォローしました。"
       end
     end
 
-    feature 'フォロー解除', type: :system do
+    context 'フォロー解除' do
       background do
         click_on 'フォローする'
       end
@@ -72,29 +77,29 @@ RSpec.feature 'user#show', type: :system do
     end
   end
 
-  feature 'ホーム画面（自分/他ユーザー共通）', type: :system do
-    feature 'リツイート', type: :system do
+  context 'ホーム画面（自分/他ユーザー共通）' do
+    context 'リツイート' do
       scenario 'リツイート一覧を表示する' do
         click_on 'リツイート'
         expect(page).to have_content 'リツイート'
       end
     end
 
-    feature 'リプライ', type: :system do
+    context 'リプライ' do
       scenario 'リプライ一覧を表示する' do
         click_on 'リプライ'
         expect(page).to have_content 'リプライ'
       end
     end
 
-    feature 'フォロー中', type: :system do
+    context 'フォロー中' do
       scenario 'フォロー中ユーザーを表示する' do
         click_on 'フォロー中'
         expect(page).to have_content 'フォロー中'
       end
     end
 
-    feature 'フォロワー', type: :system do
+    context 'フォロワー' do
       scenario 'フォロワーを表示する' do
         click_on 'フォロワー'
         expect(page).to have_content 'フォロワー'

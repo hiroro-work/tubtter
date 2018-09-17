@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'footer', type: :system do
-  let(:taro) { create(:user, name: 'taro', email: 'taro@example.com') }
+  given(:taro) { create(:user, name: 'taro', email: 'taro@example.com') }
 
   background do
     visit root_path
@@ -11,7 +11,7 @@ RSpec.feature 'footer', type: :system do
     click_on 'ログイン'
   end
 
-  feature 'アカウント削除', type: :system do
+  context 'アカウント削除' do
     scenario 'アカウントを削除する', js: true do
       click_on 'アカウント削除'
       page.driver.browser.switch_to.alert.accept

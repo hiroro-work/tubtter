@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature 'header', type: :system do
-  let!(:taro) { create(:user, name: 'taro', email: 'taro@example.com') }
-  let!(:jiro) { create(:user, name: 'jiro', email: 'jiro@example.com') }
+  given!(:taro) { create(:user, name: 'taro', email: 'taro@example.com') }
+  given!(:jiro) { create(:user, name: 'jiro', email: 'jiro@example.com') }
 
   background do
     visit root_path
@@ -12,7 +12,7 @@ RSpec.feature 'header', type: :system do
     click_on 'ログイン'
   end
 
-  feature 'ホーム', type: :system do
+  context 'ホーム' do
     background do
       click_on 'おすすめユーザー'
       page.find('a', id: "#{jiro.id}").click
@@ -24,7 +24,7 @@ RSpec.feature 'header', type: :system do
     end
   end
 
-  feature 'アカウント', type: :system do
+  context 'アカウント' do
     scenario 'アカウントを更新する' do
       click_on 'アカウント'
       fill_in 'パスワード', with: 'hogehoge'
@@ -35,7 +35,7 @@ RSpec.feature 'header', type: :system do
     end
   end
 
-  feature 'ログアウト', type: :system do
+  context 'ログアウト' do
     scenario 'ログアウトする' do
       click_on 'ログアウト'
       expect(page).to have_content 'ログアウトしました。'

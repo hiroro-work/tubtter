@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.feature 'home#index', type: :system do
-  let(:taro) { create(:user, name: 'taro', email: 'taro@example.com') }
+  given(:taro) { create(:user, name: 'taro', email: 'taro@example.com') }
 
-  feature 'アカウント登録', type: :system do
+  context 'アカウント登録' do
     background do
       visit root_path
       click_on 'アカウント作成'
@@ -31,7 +31,7 @@ RSpec.feature 'home#index', type: :system do
   end
 
 
-  feature 'ログイン', type: :system do
+  context 'ログイン' do
     scenario 'ログインする' do
       visit root_path
       click_on 'ログイン'
