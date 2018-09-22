@@ -1,4 +1,9 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+
   has_many :tweets, dependent: :destroy
   has_many :replies, dependent: :destroy
   has_many :retweets, dependent: :destroy
@@ -9,20 +14,15 @@ class User < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-
-  def follow(user)
-    active_relationships.create!(followee: user)
-  end
-
-  def unfollow(user)
-    active_relationships.find_by!(followee: user).destroy!
+  def unfollowings
+    User.where.not(id: followings.pluck(:id).push(id))
   end
 
   def following?(user)
     followings.include?(user)
+  end
+
+  def passive_relationship(user)
+    passive_relationships.find_by!(follower: user)
   end
 end
