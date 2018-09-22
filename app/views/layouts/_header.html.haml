@@ -23,8 +23,8 @@
           = button_to 'おすすめユーザー', user_unfollowings_path(@user), method: :get, class: 'btn btn-outline-dark'
       - unless current_user?(@user)
         - if current_user.following?(@user)
-          = button_to 'フォロー解除', user_follower_path(@user, @user.passive_relationship(current_user)), method: :delete, class: 'btn btn-outline-dark'
+          = button_to 'フォロー解除', user_follower_path(@user), method: :delete, class: 'btn btn-outline-dark'
         - else
-          = button_to 'フォローする', user_followers_path(@user), method: :post, class: 'btn btn-outline-dark'
+          = button_to 'フォローする', user_follower_path(@user), method: :post, class: 'btn btn-outline-dark'
     - else
       .navbar-brand 「いま」起きていることを見つけよう

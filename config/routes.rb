@@ -4,7 +4,8 @@ Rails.application.routes.draw do
     resources :tweets, only: %i[show new edit create update destroy]
     resources :replies, only: %i[index show destroy]
     resources :retweets, only: %i[index show destroy]
-    resources :followers, only: %i[index create destroy]
+    resource  :follower, only: %i[create destroy]
+    resources :followers, only: %i[index]
     resources :followings, only: %i[index]
     resources :unfollowings, only: %i[index]
   end

@@ -18,11 +18,15 @@ class User < ApplicationRecord
     User.where.not(id: followings.pluck(:id).push(id))
   end
 
-  def following?(user)
-    followings.include?(user)
+  def follow(user)
+    passive_relationships.create(follower: user)
   end
 
-  def passive_relationship(user)
-    passive_relationships.find_by!(follower: user)
+  def unfollow!(user)
+    passive_relationships.find_by!(follower: user).destroy!
+  end
+
+  def following?(user)
+    followings.include?(user)
   end
 end
