@@ -6,11 +6,11 @@ class UsersController < ApplicationController
   end
 
   def followings
-    @users = Kaminari.paginate_array(@user.all_following).page(params[:page])
+    @users = @user.followings.page(params[:page])
   end
 
   def followers
-    @users = Kaminari.paginate_array(@user.followers).page(params[:page])
+    @users = @user.followers.page(params[:page])
   end
 
   def allusers
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   def unfollow
-    current_user.stop_following(@user)
+    current_user.unfollow(@user)
     redirect_to @user, notice: "#{@user.name} のフォローを解除しました。"
   end
 

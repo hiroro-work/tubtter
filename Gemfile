@@ -47,7 +47,6 @@ gem 'devise-bootstrap-views', '~> 1.0'
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'kaminari'
-gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
 gem 'pundit'
 gem 'data-confirm-modal'
 
