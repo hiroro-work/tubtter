@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.3.3'
+ruby '2.5.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'
@@ -38,25 +38,29 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'devise'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
 gem 'simple_form'
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 gem 'bootstrap', '~> 4.1.3'
 gem 'devise-bootstrap-views', '~> 1.0'
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'kaminari'
 gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
+gem 'pundit'
+gem 'data-confirm-modal'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.7'
   gem 'factory_bot_rails'
-  gem 'rails-controller-testing'
   gem 'pry-rails'
   gem 'pry-doc'
   gem 'pry-stack_explorer'
   gem 'pry-byebug'
+  gem 'faker', github: 'stympy/faker', branch: 'master'
 end
 
 group :development do
@@ -75,10 +79,11 @@ end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
+  gem 'capybara', '~> 3.7.2'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
+  gem 'chromedriver-helper', '~> 2.0.0'
+  gem 'headless'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

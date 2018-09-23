@@ -1,16 +1,16 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, :set_user, only: [:show, :followings, :followers, :allusers, :follow, :unfollow]
+  before_action :authenticate_user!, :set_user, only: %i[show followings followers allusers follow unfollow]
 
   def show
     @tweet = current_user.tweets.build
   end
 
   def followings
-    @users = @user.all_following
+    @users = Kaminari.paginate_array(@user.all_following).page(params[:page])
   end
 
   def followers
-    @users = @user.followers
+    @users = Kaminari.paginate_array(@user.followers).page(params[:page])
   end
 
   def allusers
@@ -19,16 +19,12 @@ class UsersController < ApplicationController
 
   def follow
     current_user.follow(@user)
-    respond_to do |format|
-      format.html { redirect_to @user, notice: "You followed #{@user.name}." }
-    end
+    redirect_to @user, notice: "#{@user.name} をフォローしました。"
   end
 
   def unfollow
     current_user.stop_following(@user)
-    respond_to do |format|
-      format.html { redirect_to @user, notice: "You unfollowed #{@user.name}." }
-    end
+    redirect_to @user, notice: "#{@user.name} のフォローを解除しました。"
   end
 
   private

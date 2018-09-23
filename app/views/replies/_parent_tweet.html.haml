@@ -1,0 +1,8 @@
+.tweet-card.link
+  - if @reply.tweet
+    %h4.card-header #{@reply.tweet.user.name} ・ #{time_ago_in_words(@reply.tweet.created_at, include_seconds: true)}前
+    .card-body= simple_format(@reply.tweet.content)
+    %a{ href: user_tweet_path(@reply.tweet.user, @reply.tweet), method: :get }
+  - else
+    .card-header
+    .card-body ツイートは削除されています

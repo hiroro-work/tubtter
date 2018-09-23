@@ -1,8 +1,10 @@
 class User < ApplicationRecord
   has_many :tweets, dependent: :destroy
+  has_many :replies, dependent: :destroy
+  has_many :retweets, dependent: :destroy
 
-  validates :name, uniqueness: { case_sensitive: :false }
-  
+  validates :name, presence: true, uniqueness: { case_sensitive: :false }
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

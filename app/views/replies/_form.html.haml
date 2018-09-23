@@ -1,0 +1,9 @@
+= simple_form_for [tweet, reply] do |f|
+  = render 'share/form_error', f: f
+
+  .form-inputs
+    - if reply.content
+      = f.input :content, label: false, default: "#{reply.content}"
+    - else
+      = f.input :content, label: false, placeholder: '返信をツイート'
+  .form-actions= f.button :submit, '返信', class: 'btn btn-outline-dark'

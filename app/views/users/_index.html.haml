@@ -1,7 +1,5 @@
 - @users.each do |user|
-  .p-1
-    .card.border-dark
-      %h3.card-header
-        #{user.name}
-      .card-body
-        = button_to '開く', user, method: :get, class: "btn btn-outline-primary btn-sm"
+  .user-record
+    %h4.card-header= user.name
+    %a{ href: user_path(user), id: "#{user.id}", method: :get }
+= paginate @users

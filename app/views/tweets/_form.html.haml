@@ -1,11 +1,9 @@
 = simple_form_for [current_user, @tweet] do |f|
-  = f.error_notification
-  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
-
+  = render 'share/form_error', f: f
+  
   .form-inputs
     - if @tweet.content
       = f.input :content, label: false, default: "#{@tweet.content}"
     - else
-      = f.input :content, label: false, placeholder: "いまどうしてる？"
-  .form-actions
-    = f.button :submit, "つぶやく"
+      = f.input :content, label: false, placeholder: 'いまどうしてる？'
+  .form-actions= f.button :submit, 'つぶやく', class: 'btn btn-outline-dark'
