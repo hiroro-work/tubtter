@@ -26,7 +26,9 @@ RSpec.feature 'retweet#show', type: :system do
       scenario 'リツイートを更新する' do
         click_on '更新'
         fill_in 'retweet_content', with: '拡散しました！'
-        click_on 'リツイート'
+        within('.application-body') do
+          click_on 'リツイート'
+        end
         expect(page).to have_content 'リツイートを更新しました。'
         expect(page).to have_content '拡散しました！'
       end

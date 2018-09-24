@@ -61,14 +61,18 @@ RSpec.feature 'tweet#show', type: :system do
       end
 
       scenario 'コメントなしでリツイート' do
-        click_button 'リツイート'
+        within('.application-body') do
+          click_on 'リツイート'
+        end
         expect(page).to have_content 'リツイートしました。'
         expect(page).to have_content "#{jiro_tweet.content}"
       end
 
       scenario 'コメント付きでリツイート' do
         fill_in 'retweet_content', with: '拡散します！'
-        click_on 'リツイート'
+        within('.application-body') do
+          click_on 'リツイート'
+        end
         expect(page).to have_content 'リツイートしました。'
         expect(page).to have_content "#{jiro_tweet.content}"
         expect(page).to have_content '拡散します！'

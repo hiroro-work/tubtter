@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    models:
+      tweet: 'ツイート'
+      reply: 'リプライ'
+      retweet: 'リツイート'
+    attributes:
+      tweet:
+        content: 'ツイート内容'
+      reply:
+        content: 'リプライ内容'
+      retweet:
+        content: 'コメント'

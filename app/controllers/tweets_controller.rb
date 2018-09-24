@@ -18,7 +18,7 @@ class TweetsController < ApplicationController
     if @tweet.save
       redirect_to current_user, notice: 'つぶやきました。'
     else
-      redirect_to current_user
+      render template: 'users/show'
     end
   end
 
