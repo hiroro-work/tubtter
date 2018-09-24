@@ -10,6 +10,6 @@
       .form-inline
         = button_to 'リツイート', new_tweet_retweet_path(@tweet), method: :get, class: 'btn btn-outline-dark btn-sm'
 .padding-form
-  = render 'replies/form', tweet: @tweet, reply: @reply, path: tweet_replies_path(@tweet, @reply)
+  = render 'replies/form', tweet: @tweet, reply: @reply
 .padding-child-record
   = render 'replies/index', replies: @tweet.replies.reverse_order.page(params[:page])

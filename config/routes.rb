@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
 
   resources :tweets do
-    resources :replies, only: %i[new edit create update], module: :tweets
+    resources :replies, only: %i[new edit create update], module: :tweets, as: 'tweets'
     resources :retweets, only: %i[new edit create update], module: :tweets
   end
 
