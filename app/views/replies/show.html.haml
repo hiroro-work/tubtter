@@ -10,5 +10,9 @@
     - if current_user?(@reply.user)
       .form-inline
         - if @reply.parent_tweet
-          = button_to '更新', edit_tweet_tweet_path(@reply.parent_tweet, @reply), method: :get, class: 'btn btn-outline-dark btn-sm'
+          = button_to '更新', edit_tweet_reply_path(@reply.parent_tweet, @reply), method: :get, class: 'btn btn-outline-dark btn-sm'
         = button_to '削除', user_reply_path(@reply.user, @reply), method: :delete, class: 'btn btn-outline-dark btn-sm'
+.padding-form
+  = render 'replies/form', tweet: @reply, reply: @reply_to_reply
+.padding-child-record
+  = render 'replies/index', replies: @reply.replies.reverse_order.page(params[:page])

@@ -7,6 +7,7 @@ class Users::RepliesController < RepliesController
   end
 
   def show
+    @reply_to_reply = @reply.replies.build
   end
 
   def destroy
