@@ -8,6 +8,6 @@ class RepliesController < ApplicationController
     end
 
     def reply_params
-      params.require(:reply).permit(:content).merge(user: current_user)
+      params.require(:tweet).permit(:content).merge(user: current_user)
     end
 end

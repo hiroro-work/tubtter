@@ -3,10 +3,11 @@ class Users::RepliesController < RepliesController
   before_action :set_reply, :authorize_reply, only: %i[show destroy]
 
   def index
-    @replies = @user.replies.reverse_order.page(params[:page])
+    @replies = @user.replies_only.reverse_order.page(params[:page])
   end
 
   def show
+    @reply_to_reply = @reply.replies.build
   end
 
   def destroy
@@ -21,6 +22,6 @@ class Users::RepliesController < RepliesController
     end
 
     def set_reply
-      @reply = @user.replies.find(params[:id])
+      @reply = @user.replies_only.find(params[:id])
     end
 end

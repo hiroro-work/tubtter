@@ -3,12 +3,16 @@
 .reply-card
   .card-header
     %h4 #{@reply.user.name} ・ #{time_ago_in_words(@reply.created_at, include_seconds: true)}前
-    - if @reply.tweet
-      返信先: #{@reply.tweet.user.name}
+    - if @reply.parent_tweet
+      返信先: #{@reply.parent_tweet.user.name}
   .card-body= simple_format(@reply.content)
   .card-footer
     - if current_user?(@reply.user)
       .form-inline
-        - if @reply.tweet
-          = button_to '更新', edit_tweet_reply_path(@reply.tweet, @reply), method: :get, class: 'btn btn-outline-dark btn-sm'
+        - if @reply.parent_tweet
+          = button_to '更新', edit_tweet_reply_path(@reply.parent_tweet, @reply), method: :get, class: 'btn btn-outline-dark btn-sm'
         = button_to '削除', user_reply_path(@reply.user, @reply), method: :delete, class: 'btn btn-outline-dark btn-sm'
+.padding-form
+  = render 'replies/form', tweet: @reply, reply: @reply_to_reply
+.padding-child-record
+  = render 'replies/index', replies: @reply.replies.reverse_order.page(params[:page])
