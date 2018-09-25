@@ -19,4 +19,4 @@
 .padding-form
   = render 'replies/form', tweet: @retweet.tweet, reply: @reply
 .padding-child-record
-  = render 'replies/index', replies: @retweet.tweet.replies.reverse_order.page(params[:page])
+  = render 'tweets/index', tweets: @retweet.tweet.replies.reverse_order.page(params[:page])

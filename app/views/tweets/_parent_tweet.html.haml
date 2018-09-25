@@ -1,0 +1,4 @@
+.tweet-card.link
+  %h4.card-header #{parent_tweet.user.name} ・ #{time_ago_in_words(parent_tweet.created_at, include_seconds: true)}前
+  .card-body= simple_format(parent_tweet.content)
+  %a{ href: user_tweet_path(parent_tweet.user,parent_tweet), method: :get }

@@ -39,7 +39,7 @@ RSpec.feature 'tweet#show', type: :system do
 
     context '返信' do
       scenario '返信する' do
-        fill_in 'reply_content', with: '自分に返信してみたり。'
+        fill_in 'tweet_content', with: '自分に返信してみたり。'
         click_on '返信'
         expect(page).to have_content 'リプライしました。'
         expect(page).to have_content '自分に返信してみたり。'
@@ -81,7 +81,7 @@ RSpec.feature 'tweet#show', type: :system do
 
     context '返信' do
       scenario '返信する' do
-        fill_in 'reply_content', with: 'はじめまして。taroです。'
+        fill_in 'tweet_content', with: 'はじめまして。taroです。'
         click_on '返信'
         expect(page).to have_content 'リプライしました。'
         expect(page).to have_content 'はじめまして。taroです。'

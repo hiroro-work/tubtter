@@ -44,7 +44,7 @@ RSpec.feature 'retweet#show', type: :system do
 
     context '返信' do
       scenario '返信する' do
-        fill_in 'reply_content', with: '拡散しときました！'
+        fill_in 'tweet_content', with: '拡散しときました！'
         click_on '返信'
         expect(page).to have_content 'リプライしました。'
         expect(page).to have_content '拡散しときました！'
@@ -61,7 +61,7 @@ RSpec.feature 'retweet#show', type: :system do
 
     context '返信' do
       scenario '返信する' do
-        fill_in 'reply_content', with: 'どんどん拡散お願いします！'
+        fill_in 'tweet_content', with: 'どんどん拡散お願いします！'
         click_on '返信'
         expect(page).to have_content 'リプライしました。'
         expect(page).to have_content 'どんどん拡散お願いします！'

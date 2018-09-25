@@ -1,1 +1,6 @@
-= render 'tweets/form', user: @user, tweet: @tweet
+- if @tweet.parent_tweet
+  = render 'tweets/parent_tweet', parent_tweet: @tweet.parent_tweet
+  .padding-form
+    = render 'tweets/form', user: @user, tweet: @tweet
+- else
+  = render 'tweets/form', user: @user, tweet: @tweet
