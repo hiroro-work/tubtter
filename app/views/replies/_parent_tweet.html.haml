@@ -2,7 +2,10 @@
   - if @reply.parent_tweet
     %h4.card-header #{@reply.parent_tweet.user.name} ・ #{time_ago_in_words(@reply.parent_tweet.created_at, include_seconds: true)}前
     .card-body= simple_format(@reply.parent_tweet.content)
-    %a{ href: user_tweet_path(@reply.parent_tweet.user, @reply.parent_tweet), method: :get }
+    - if @reply.parent_tweet.parent_tweet
+      %a{ href: user_reply_path(@reply.parent_tweet.user, @reply.parent_tweet), method: :get }
+    - else
+      %a{ href: user_tweet_path(@reply.parent_tweet.user, @reply.parent_tweet), method: :get }
   - else
     .card-header
     .card-body ツイートは削除されています
