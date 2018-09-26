@@ -1,6 +1,5 @@
 = simple_form_for [tweet, reply] do |f|
   = render 'share/form_error', f: f
-
   .form-inputs
     - if reply.content
       = f.input :content, label: false, default: "#{reply.content}"

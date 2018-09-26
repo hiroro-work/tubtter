@@ -6,8 +6,7 @@
     - if signed_in?
       .form-inline
         .navbar-brand.text-light @#{current_user.name}
-        = button_to 'ホーム', current_user, method: :get, class: 'btn btn-outline-light'
-        = button_to 'アカウント', edit_user_registration_path, method: :get, class: 'btn btn-outline-light'
-        = button_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn-outline-light'
-
+        = link_to 'ホーム', current_user, class: 'btn btn-outline-light'
+        = link_to 'アカウント', edit_user_registration_path, class: 'btn btn-outline-light'
+        = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn-outline-light'
   = render 'layouts/user_home_header', user: @user || current_user
