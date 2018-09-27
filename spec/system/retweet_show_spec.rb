@@ -9,15 +9,12 @@ RSpec.feature 'retweet#show', type: :system do
   given!(:jiro_retweet) { create(:retweet, user: jiro, tweet: taro_tweet) }
 
   background do
-    visit root_path
-    click_on 'ログイン'
-    fill_in 'Eメール', with: "#{taro.email}"
-    fill_in 'パスワード', with: "#{taro.password}"
-    click_on 'ログイン'
+    login_as taro, scope: :user
   end
 
   context '自分のリツイート' do
     background do
+      visit user_path(taro)
       click_on 'リツイート'
       page.find('a', id: "#{taro_retweet.id}").click
     end

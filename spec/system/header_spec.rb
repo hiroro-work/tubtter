@@ -5,11 +5,8 @@ RSpec.feature 'header', type: :system do
   given!(:jiro) { create(:user, name: 'jiro', email: 'jiro@example.com') }
 
   background do
-    visit root_path
-    click_on 'ログイン'
-    fill_in 'Eメール', with: "#{taro.email}"
-    fill_in 'パスワード', with: "#{taro.password}"
-    click_on 'ログイン'
+    login_as taro, scope: :user
+    visit user_path(taro)
   end
 
   context 'ホーム' do

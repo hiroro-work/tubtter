@@ -7,15 +7,12 @@ RSpec.feature 'tweet#show', type: :system do
   given!(:jiro_tweet) { create(:tweet, user: jiro, content: 'jiroです。') }
 
   background do
-    visit root_path
-    click_on 'ログイン'
-    fill_in 'Eメール', with: "#{taro.email}"
-    fill_in 'パスワード', with: "#{taro.password}"
-    click_on 'ログイン'
+    login_as taro, scope: :user
   end
 
   context '自分のツイート' do
     background do
+      visit user_path(taro)
       page.find('a', id: "#{taro_tweet.id}").click
     end
 

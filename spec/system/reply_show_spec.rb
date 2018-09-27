@@ -9,15 +9,12 @@ RSpec.feature 'reply(tweet)#show', type: :system do
   given!(:jiro_reply) { create(:tweet, user: jiro, parent_tweet: taro_tweet, content: 'こんにちは。jiroです。') }
 
   background do
-    visit root_path
-    click_on 'ログイン'
-    fill_in 'Eメール', with: "#{taro.email}"
-    fill_in 'パスワード', with: "#{taro.password}"
-    click_on 'ログイン'
+    login_as taro, scope: :user
   end
 
   context '自分のリプライ' do
     background do
+      visit user_path(taro)
       click_on 'リプライ'
       page.find('a', id: "#{taro_reply.id}").click
     end
