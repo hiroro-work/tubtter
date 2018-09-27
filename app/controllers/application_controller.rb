@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
 
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  # rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -15,8 +15,8 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
     end
 
-    def user_not_authorized(exception)
-      flash[:alert] = '権限がありません。'
-      redirect_to(request.referrer || root_path)
-    end
+    # def user_not_authorized(exception)
+    #   flash[:alert] = '権限がありません。'
+    #   redirect_to(request.referrer || root_path)
+    # end
 end
