@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature 'home#index', type: :system do
   given(:taro) { create(:user, name: 'taro', email: 'taro@example.com') }
 
-  context 'アカウント登録' do
+  feature 'アカウント登録', type: :system do
     background do
       visit root_path
       click_on 'アカウント作成'
@@ -13,25 +13,31 @@ RSpec.feature 'home#index', type: :system do
     end
 
     scenario '名前未入力はNG' do
-      click_on 'アカウント登録'
+      expect {
+        click_on 'アカウント登録'
+      }.to change(User, :count).by(0)
       expect(page).to have_content '名前を入力してください'
     end
 
     scenario '使用済みの名前はNG' do
       fill_in '名前', with: "#{taro.name}"
-      click_on 'アカウント登録'
+      expect {
+        click_on 'アカウント登録'
+      }.to change(User, :count).by(0)
       expect(page).to have_content '名前はすでに存在します'
     end
 
     scenario 'アカウントを登録する' do
       fill_in '名前', with: 'jiro'
-      click_on 'アカウント登録'
+      expect {
+        click_on 'アカウント登録'
+      }.to change(User, :count).by(1)
       expect(page).to have_content 'アカウント登録が完了しました。'
     end
   end
 
 
-  context 'ログイン' do
+  feature 'ログイン', type: :system do
     scenario 'ログインする' do
       visit root_path
       click_on 'ログイン'

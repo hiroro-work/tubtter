@@ -10,31 +10,35 @@ RSpec.feature 'user#show', type: :system do
   end
 
   context '自分のホーム画面' do
-    context 'ツイート' do
+    feature 'ツイート', type: :system do
       scenario 'ツイート一覧を表示する' do
         click_on 'ツイート'
         expect(page).to have_button 'つぶやく'
       end
     end
 
-    context 'つぶやく' do
+    feature 'つぶやく', type: :system do
       background do
         click_on 'ツイート'
       end
 
       scenario 'content未入力だとつぶやけない' do
-        click_on 'つぶやく'
+        expect {
+          click_on 'つぶやく'
+        }.to change(Tweet, :count).by(0)
         expect(page).to have_no_content 'つぶやきました。'
       end
 
       scenario 'つぶやく' do
         fill_in 'tweet_content', with: 'はじめまして'
-        click_on 'つぶやく'
+        expect {
+          click_on 'つぶやく'
+        }.to change(Tweet, :count).by(1)
         expect(page).to have_content 'つぶやきました。'
       end
     end
 
-    context 'おすすめユーザー' do
+    feature 'おすすめユーザー', type: :system do
       scenario 'おすすめユーザーを表示する' do
         click_on 'おすすめユーザー'
         expect(page).to have_content 'おすすめユーザー'
@@ -48,55 +52,59 @@ RSpec.feature 'user#show', type: :system do
       page.find('a', id: "#{jiro.id}").click
     end
 
-    context 'ツイート' do
+    feature 'ツイート', type: :system do
       scenario 'ツイート一覧を表示する' do
         click_on 'ツイート'
         expect(page).to have_no_button 'つぶやく'
       end
     end
 
-    context 'フォロー' do
+    feature 'フォロー', type: :system do
       scenario 'フォローする' do
-        click_on 'フォローする'
+        expect {
+          click_on 'フォローする'
+        }.to change(Relationship, :count).by(1)
         expect(page).to have_content "#{jiro.name} をフォローしました。"
       end
     end
 
-    context 'フォロー解除' do
+    feature 'フォロー解除', type: :system do
       background do
         click_on 'フォローする'
       end
 
       scenario 'フォローを解除する' do
-        click_on 'フォロー解除'
+        expect {
+          click_on 'フォロー解除'
+        }.to change(Relationship, :count).by(-1)
         expect(page).to have_content "#{jiro.name} のフォローを解除しました。"
       end
     end
   end
 
   context 'ホーム画面（自分/他ユーザー共通）' do
-    context 'リツイート' do
+    feature 'リツイート', type: :system do
       scenario 'リツイート一覧を表示する' do
         click_on 'リツイート'
         expect(page).to have_content 'リツイート'
       end
     end
 
-    context 'リプライ' do
+    feature 'リプライ', type: :system do
       scenario 'リプライ一覧を表示する' do
         click_on 'リプライ'
         expect(page).to have_content 'リプライ'
       end
     end
 
-    context 'フォロー中' do
+    feature 'フォロー中', type: :system do
       scenario 'フォロー中ユーザーを表示する' do
         click_on 'フォロー中'
         expect(page).to have_content 'フォロー中'
       end
     end
 
-    context 'フォロワー' do
+    feature 'フォロワー', type: :system do
       scenario 'フォロワーを表示する' do
         click_on 'フォロワー'
         expect(page).to have_content 'フォロワー'

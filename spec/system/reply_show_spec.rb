@@ -19,21 +19,36 @@ RSpec.feature 'reply(tweet)#show', type: :system do
       page.find('a', id: "#{taro_reply.id}").click
     end
 
-    context '更新' do
+    feature '更新', type: :system do
       scenario 'リプライを更新する' do
         click_on '更新'
         fill_in 'tweet_content', with: 'はじめまして。taroです。'
-        click_on 'つぶやく'
+        expect {
+          click_on 'つぶやく'
+        }.to change(Tweet, :count).by(0)
         expect(page).to have_content 'ツイートを更新しました。'
         expect(page).to have_content 'はじめまして。taroです。'
       end
     end
 
-    context '削除' do
+    feature '削除', type: :system do
       scenario 'リプライを削除する' do
-        click_on '削除'
+        expect {
+          click_on '削除'
+        }.to change(Tweet, :count).by(-1)
         expect(page).to have_content 'ツイートを削除しました。'
         expect(page).to have_no_content "#{taro_reply.content}"
+      end
+    end
+
+    feature '返信', type: :system do
+      scenario 'リプライに返信する' do
+        fill_in 'tweet_content', with: 'リプライにリプライ！'
+        expect {
+          click_on '返信'
+        }.to change(Tweet, :count).by(1)
+        expect(page).to have_content 'リプライしました。'
+        expect(page).to have_content 'リプライにリプライ！'
       end
     end
   end
@@ -48,6 +63,17 @@ RSpec.feature 'reply(tweet)#show', type: :system do
     scenario 'リプライを表示する' do
       expect(page).to have_content "#{jiro_reply.parent_tweet.content}"
       expect(page).to have_content "#{jiro_reply.content}"
+    end
+
+    feature '返信', type: :system do
+      scenario 'リプライに返信する' do
+        fill_in 'tweet_content', with: 'リプライにリプライ！'
+        expect {
+          click_on '返信'
+        }.to change(Tweet, :count).by(1)
+        expect(page).to have_content 'リプライしました。'
+        expect(page).to have_content 'リプライにリプライ！'
+      end
     end
   end
 end

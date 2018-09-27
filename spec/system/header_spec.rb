@@ -9,7 +9,7 @@ RSpec.feature 'header', type: :system do
     visit user_path(taro)
   end
 
-  context 'ホーム' do
+  feature 'ホーム', type: :system do
     background do
       click_on 'おすすめユーザー'
       page.find('a', id: "#{jiro.id}").click
@@ -21,18 +21,20 @@ RSpec.feature 'header', type: :system do
     end
   end
 
-  context 'アカウント' do
+  feature 'アカウント', type: :system do
     scenario 'アカウントを更新する' do
       click_on 'アカウント'
       fill_in 'パスワード', with: 'hogehoge'
       fill_in 'パスワード（確認用）', with: 'hogehoge'
       fill_in '現在のパスワード', with: "#{taro.password}"
-      click_on '更新'
+      expect {
+        click_on '更新'
+      }.to change(User, :count).by(0)
       expect(page).to have_content 'アカウント情報を変更しました。'
     end
   end
 
-  context 'ログアウト' do
+  feature 'ログアウト', type: :system do
     scenario 'ログアウトする' do
       click_on 'ログアウト'
       expect(page).to have_content 'ログアウトしました。'
