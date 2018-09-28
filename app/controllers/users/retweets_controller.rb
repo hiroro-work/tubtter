@@ -3,7 +3,7 @@ class Users::RetweetsController < RetweetsController
   before_action :set_retweet, :authorize_retweet, only: %i[show destroy]
 
   def index
-    @retweets = @user.retweets.reverse_order.page(params[:page])
+    @retweets = @user.retweets.page(params[:page])
   end
 
   def show

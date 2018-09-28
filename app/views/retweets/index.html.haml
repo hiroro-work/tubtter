@@ -1,7 +1,7 @@
 %nav.navbar.navbar-light.bg-white
   %a.navbar-brand リツイート
 
-- @retweets.each do |retweet|
+- @retweets.order(created_at: :desc).each do |retweet|
   .tweet-record
     .card-header
       #{retweet.user.name} さんがリツイート

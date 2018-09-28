@@ -1,4 +1,4 @@
 - if current_user?(@user)
   .padding-form
     = render 'tweets/form', user: @user, tweet: @tweet
-= render 'tweets/index', tweets: @user.tweets_only.reverse_order.page(params[:page])
+= render 'tweets/index', tweets: @user.tweets_only.page(params[:page])

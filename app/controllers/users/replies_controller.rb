@@ -2,7 +2,7 @@ class Users::RepliesController < RepliesController
   before_action :set_user
 
   def index
-    @replies = @user.replies_only.reverse_order.page(params[:page])
+    @replies = @user.replies_only.page(params[:page])
   end
 
   private

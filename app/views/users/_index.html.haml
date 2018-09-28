@@ -1,4 +1,4 @@
-- @users.each do |user|
+- @users.order(:name).each do |user|
   .user-record
     %h4.card-header= user.name
     %a{ href: user_path(user), id: "#{user.id}", method: :get }
