@@ -1,7 +1,7 @@
 %nav.navbar.navbar-light.bg-light
   - if signed_in? && user
     .form-inline
-      = render 'layouts/user_icon', user: user
+      = render 'layouts/user_icon', icon: user.icon.thumb
       .navbar-brand #{user.name}のホーム
       = link_to 'ツイート', user_path(user), class: 'btn btn-outline-dark'
       = link_to 'リツイート', user_retweets_path(user), class: 'btn btn-outline-dark'

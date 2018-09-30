@@ -1,7 +1,7 @@
 class IconUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  process resize_to_fit: [400, 400]
+  process resize_to_fit: [100, 100]
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -20,6 +20,9 @@ class IconUploader < CarrierWave::Uploader::Base
   #
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
+  def default_url
+    ActionController::Base.helpers.asset_path('fallback/' + [version_name, 'default.png'].compact.join('_'))
+  end
 
   # Process files as they are uploaded:
   # process scale: [200, 300]
@@ -32,6 +35,13 @@ class IconUploader < CarrierWave::Uploader::Base
   # version :thumb do
   #   process resize_to_fit: [50, 50]
   # end
+  version :thumb do
+    process resize_to_fit: [50, 50]
+  end
+
+  version :small_thumb do
+    process resize_to_fit: [30, 30]
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

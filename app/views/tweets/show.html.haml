@@ -3,10 +3,9 @@
     = render 'tweets/parent_tweet', parent_tweet: @tweet.parent_tweet
 
 .tweet-card
-  .card-header
-    %h4 #{@tweet.user.name} ・ #{time_ago_in_words(@tweet.created_at, include_seconds: true)}前
-    - if @tweet.parent_tweet
-      返信先: #{@tweet.parent_tweet.user.name}
+  %h5.card-header.form-inline
+    = render 'layouts/user_icon', icon: @tweet.user.icon.small_thumb
+    #{@tweet.user.name} ・ #{time_ago_in_words(@tweet.created_at, include_seconds: true)}前
   .card-body= simple_format(@tweet.content)
   .card-footer
     - if current_user?(@user)

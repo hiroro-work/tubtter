@@ -5,7 +5,9 @@
   .tweet-record
     .card-header
       #{retweet.user.name} さんがリツイート
-      %h4 #{retweet.tweet.user.name} ・ #{time_ago_in_words(retweet.tweet.created_at, include_seconds: true)}前
+      %h5.mt-2.form-inline
+        = render 'layouts/user_icon', icon: retweet.user.icon.small_thumb
+        #{retweet.tweet.user.name} ・ #{time_ago_in_words(retweet.tweet.created_at, include_seconds: true)}前
     .card-body= simple_format(retweet.tweet.content)
     %a{ href: user_retweet_path(retweet.user, retweet), id: "#{retweet.id}", method: :get }
 = paginate @retweets
