@@ -5,6 +5,7 @@
       %span Tubtter
     - if signed_in?
       .form-inline
+        = render 'layouts/user_icon', user: current_user
         .navbar-brand.text-light @#{current_user.name}
         = link_to 'ホーム', current_user, class: 'btn btn-outline-light'
         = link_to 'アカウント', edit_user_registration_path, class: 'btn btn-outline-light'

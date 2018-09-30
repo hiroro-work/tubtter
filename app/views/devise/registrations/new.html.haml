@@ -5,6 +5,10 @@
     = f.label :name
     = f.text_field :name, autofocus: true, autocomplete: 'name', class: 'form-control'
   .form-group
+    = f.label :icon
+    = f.file_field :icon, class: 'form-control'
+    = f.hidden_field :icon_cache
+  .form-group
     = f.label :email
     = f.email_field :email, autocomplete: 'email', class: 'form-control'
     -# = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control'

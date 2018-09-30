@@ -13,6 +13,8 @@ class User < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
+  mount_uploader :icon, IconUploader
+
   def tweets_only
     tweets.where(parent_tweet: nil)
   end

@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
   protected
 
     def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+      devise_parameter_sanitizer.permit(:sign_up, keys: %i[name icon icon_cache])
+      devise_parameter_sanitizer.permit(:account_update, keys: %i[name icon icon_cache remove_icon])
     end
 
     # def user_not_authorized(exception)
