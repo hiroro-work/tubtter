@@ -85,7 +85,17 @@
 
 .user-icon-preview {
   @extend .user-icon;
+  @extend .mb-1;
 
   width: 50px;
   height: 50px;
+}
+
+.trimming-user-icon {
+  width: 100%;
+  height: auto;
+}
+
+.modal-dialog {
+  max-width: 40%;
 }

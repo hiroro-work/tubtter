@@ -3,19 +3,51 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
 
-  reloadUserIconPreview = (input) ->
-    if input.files and input.files[0]
-      reader = new FileReader
+  getFile = (elem) ->
+    if elem.files then $(elem).prop('files')[0] else null
 
-      reader.onload = (e) ->
-        $('#registration-user-icon-preview').attr 'src', e.currentTarget.result
-        return
+  setFile = (elem, file) ->
+    reader = new FileReader
+    reader.onload = (e) ->
+      elem.setAttribute 'src', e.currentTarget.result
+      return
+    reader.readAsDataURL file
+    return
 
-      reader.readAsDataURL input.files[0]
+  openModal = (id) ->
+    $("#{id}").modal('show')
+    return
+
+  closeModal = (id) ->
+    $('body').removeClass('modal-open')
+    $('.modal-backdrop').remove()
+    $("#{id}").modal('hide')
+    return
+
+  reloadUserIconPreview = (doc) ->
+    elem_icon = doc.getElementById('registration-user-icon')
+    elem_icon_preview = doc.getElementById('registration-user-icon-preview')
+
+    icon_file = getFile(elem_icon)
+    return unless icon_file
+    setFile(elem_icon_preview, icon_file)
     return
 
   $('#registration-user-icon').change ->
-    reloadUserIconPreview this
+    input_file = getFile(this)
+    return unless input_file
+    elem_trimming_icon = window.document.getElementById('trimming-user-icon')
+    setFile(elem_trimming_icon, input_file)
+    openModal '#user-icon-modal'
+    return
+
+  $('#user-icon-save-button').click ->
+    reloadUserIconPreview window.parent.document
+    closeModal '#user-icon-modal'
+    return
+
+  $('#user-icon-cancel-button').click ->
+    $('input[type=file]').val('')
     return
 
   return

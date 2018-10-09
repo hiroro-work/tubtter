@@ -1,6 +1,7 @@
 %h1= t('.sign_up')
 = form_for(resource, as: resource_name, url: registration_path(resource_name), remote: true) do |f|
   = bootstrap_devise_error_messages!
+  = render 'devise/shared/user_icon_modal'
   .form-group
     = f.label :name
     = f.text_field :name, autofocus: true, autocomplete: 'name', class: 'form-control'
@@ -8,7 +9,7 @@
     = f.label :icon
     = image_tag "#{resource.icon.thumb}", class: 'user-icon-preview', id: 'registration-user-icon-preview'
     = f.file_field :icon, class: 'form-control', id: 'registration-user-icon'
-    = f.hidden_field :icon_cache
+    = f.hidden_field :icon_cache, id: 'registration-user-icon-cache'
   .form-group
     = f.label :email
     = f.email_field :email, autocomplete: 'email', class: 'form-control'
