@@ -7,9 +7,9 @@ getFile = (elem) ->
 setFile = (elem, file) ->
   reader = new FileReader
   reader.onload = (e) ->
-    elem.setAttribute 'src', e.currentTarget.result
+    elem.setAttribute('src', e.currentTarget.result)
     return
-  reader.readAsDataURL file
+  reader.readAsDataURL(file)
   return
 
 setValue = (elem, value) ->
@@ -24,14 +24,10 @@ closeModal = (id) ->
   $('body').removeClass('modal-open')
   $('.modal-backdrop').remove()
   $(id).modal('hide')
-
-  $(id).on 'hidden.bs.modal', ->
-    $(this).removeData('bs.modal')
-    return
   return
 
 cancelCrop = (cropper) ->
-  cropper.destroy()
+  cropper.destroy() if cropper
   $('input[type=file]').val('')
   return
 
@@ -59,6 +55,7 @@ ready = ->
   elem_icon_width = doc.getElementById('registration-user-icon-width')
   elem_icon_height = doc.getElementById('registration-user-icon-height')
   elem_trimming_icon = doc.getElementById('trimming-user-icon')
+  cropper = undefined
 
   setCroppedData = (doc, data) ->
     setValue(elem_icon_x, data.x)
@@ -74,45 +71,47 @@ ready = ->
 
   reloadUserIconPreview = (doc) ->
     icon_file = getFile(elem_icon)
-    return unless icon_file
-    setFile(elem_icon_preview, icon_file)
+    setFile(elem_icon_preview, icon_file) if icon_file
     return
 
   $('#registration-user-icon').change ->
     input_file = getFile(this)
     return unless input_file
     setFile(elem_trimming_icon, input_file)
-    openModal '#user-icon-modal'
+    openModal('#user-icon-modal')
     return
 
-  $('#user-icon-modal').one 'shown.bs.modal', ->
-    cropper = undefined
+  $('#user-icon-modal').off 'shown.bs.modal'
+  $('#user-icon-modal').on 'shown.bs.modal', ->
     options =
       aspectRatio: 1 / 1
       autoCropArea: 0.5
       zoomable: false
       modal: false
-
     cropper = new Cropper(elem_trimming_icon, options)
-    $('#user-icon-save-button').click ->
-      setCroppedData(window.parent.document, cropper.getData())
-      cropper.getCroppedCanvas({ width: 100, height: 100 }).toBlob (blob) ->
-        replaceUserIcon(window.parent.document, blob)
-        return
-      cropper.destroy()
-      closeModal '#user-icon-modal'
-      return
+    return
 
-    $('#user-icon-close-button').click ->
-      cancelCrop(cropper)
+  $('#user-icon-save-button').click ->
+    return unless cropper
+    setCroppedData(window.parent.document, cropper.getData())
+    cropper.getCroppedCanvas({ width: 100, height: 100 }).toBlob (blob) ->
+      replaceUserIcon(window.parent.document, blob)
       return
+    cropper.destroy()
+    cropper = undefined
+    closeModal('#user-icon-modal')
+    return
 
-    $('#user-icon-cancel-button').click ->
-      cancelCrop(cropper)
-      return
+  $('#user-icon-close-button').click ->
+    cancelCrop(cropper)
+    cropper = undefined
+    return
 
+  $('#user-icon-cancel-button').click ->
+    cancelCrop(cropper)
+    cropper = undefined
     return
 
   return
 
-$(document).on 'ready turbolinks:load', ready
+$(document).on('ready turbolinks:load', ready)
