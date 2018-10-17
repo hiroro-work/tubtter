@@ -2,6 +2,7 @@
 @import "bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "cropper.min";
 
 .application-body {
   padding: ($spacer * 9) ($spacer * 0.5) ($spacer * 3) ($spacer * 0.5);
@@ -94,6 +95,18 @@
 .trimming-user-icon {
   width: 100%;
   height: auto;
+
+  img {
+    max-width: 100%;
+  }
+}
+
+.cropper-container {
+  position: static;
+}
+
+.cropper-bg {
+  background-image: none;
 }
 
 .modal-dialog {

@@ -15,6 +15,11 @@ class User < ApplicationRecord
 
   mount_uploader :icon, IconUploader
 
+  attr_accessor :icon_x
+  attr_accessor :icon_y
+  attr_accessor :icon_width
+  attr_accessor :icon_height
+
   def tweets_only
     tweets.where(parent_tweet: nil)
   end

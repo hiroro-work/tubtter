@@ -1,6 +1,7 @@
 class IconUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
+  process :crop
   process resize_to_fit: [100, 100]
 
   # Choose what kind of storage to use for this uploader:
@@ -54,4 +55,17 @@ class IconUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  private
+
+    def crop
+      return unless [model.icon_x, model.icon_y, model.icon_width, model.icon_height].all?
+      manipulate! do |icon|
+        x = model.icon_x
+        y = model.icon_y
+        width = model.icon_width
+        height = model.icon_height
+        icon.crop "#{width}x#{height}+#{x}+#{y}"
+      end
+    end
 end
