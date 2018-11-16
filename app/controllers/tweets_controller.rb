@@ -18,7 +18,7 @@ class TweetsController < ApplicationController
     if @tweet.save
       redirect_to current_user, notice: 'つぶやきました。'
     else
-      redirect_to current_user
+      render template: 'users/show'
     end
   end
 
@@ -31,7 +31,7 @@ class TweetsController < ApplicationController
   end
 
   def destroy
-    @tweet.destroy
+    @tweet.destroy!
     redirect_to current_user, notice: 'ツイートを削除しました。'
   end
 

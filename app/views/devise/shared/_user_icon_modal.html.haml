@@ -1,0 +1,13 @@
+-# #user-icon-modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "modalLabel", :role => "dialog", :tabindex => "-1"}
+#user-icon-modal.modal.fade{ 'aria-hidden': 'true', role: 'dialog', tabindex: '-1' }
+  .modal-dialog{ role: 'document' }
+    .modal-content
+      .modal-header
+        %h5.modal-title ユーザーアイコンを登録してください。
+        %button.close{ 'aria-label': 'Close', 'data-dismiss': 'modal', type: 'button', id: 'user-icon-close-button' }
+          %span{ 'aria-hidden': 'true' } ×
+      .modal-body
+        = image_tag '', class: 'trimming-user-icon', id: 'trimming-user-icon'
+      .modal-footer
+        %button.btn.btn-secondary{ 'data-dismiss': 'modal', type: 'button', id: 'user-icon-cancel-button' } キャンセル
+        %button.btn.btn-primary{ type: 'button', id: 'user-icon-save-button' } 保存

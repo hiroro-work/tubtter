@@ -1,9 +1,11 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
-@import 'bootstrap';
-@import 'font-awesome';
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "cropper.min";
 
 .application-body {
-  padding: ($spacer * 8) ($spacer * 0.5) ($spacer * 3) ($spacer * 0.5);
+  padding: ($spacer * 9) ($spacer * 0.5) ($spacer * 3) ($spacer * 0.5);
 }
 
 .link {
@@ -73,4 +75,40 @@
 .padding-parent-record {
   @extend .pl-4;
   @extend .pb-1;
+}
+
+.user-icon {
+  @extend .mr-1;
+  @extend .ml-1;
+
+  border-radius: 50%;
+}
+
+.user-icon-preview {
+  @extend .user-icon;
+  @extend .mb-1;
+
+  width: 50px;
+  height: 50px;
+}
+
+.trimming-user-icon {
+  width: 100%;
+  height: auto;
+
+  img {
+    max-width: 100%;
+  }
+}
+
+.cropper-container {
+  position: static;
+}
+
+.cropper-bg {
+  background-image: none;
+}
+
+.modal-dialog {
+  max-width: 40%;
 }

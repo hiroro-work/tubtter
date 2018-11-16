@@ -41,15 +41,16 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 gem 'simple_form'
-gem 'font-awesome-rails'
+gem 'font-awesome-sass'
 gem 'bootstrap', '~> 4.1.3'
 gem 'devise-bootstrap-views', '~> 1.0'
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'kaminari'
-gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
 gem 'pundit'
 gem 'data-confirm-modal'
+gem 'carrierwave'
+gem 'mini_magick'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -79,11 +80,11 @@ end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '~> 3.7.2'
+  gem 'capybara'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper', '~> 2.0.0'
-  gem 'headless'
+  gem 'chromedriver-helper'
+  gem 'simplecov', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

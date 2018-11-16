@@ -1,6 +1,9 @@
-- tweets.each do |tweet|
+- tweets.order(created_at: :desc).each do |tweet|
   .tweet-record
-    .card-header #{time_ago_in_words(tweet.created_at, include_seconds: true)}前
+    .card-header
+      .form-inline
+        = render 'layouts/user_icon', icon: tweet.user.icon.small_thumb
+        #{tweet.user.name} ・ #{time_ago_in_words(tweet.created_at, include_seconds: true)}前
     .card-body= simple_format(tweet.content)
     %a{ href: user_tweet_path(@user, tweet), id: "#{tweet.id}", method: :get }
 = paginate tweets

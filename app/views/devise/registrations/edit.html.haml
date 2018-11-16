@@ -1,9 +1,22 @@
 %h1= t('.title', resource: resource_name.to_s.humanize)
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }, remote: true) do |f|
   = bootstrap_devise_error_messages!
+  = render 'devise/shared/user_icon_modal'
   .form-group
     = f.label :name
     = f.text_field :name, autofocus: true, autocomplete: 'name', class: 'form-control'
+  #user-icon-form.form-group
+    = f.label :icon
+    = image_tag "#{resource.icon.thumb}", class: 'user-icon-preview', id: 'registration-user-icon-preview'
+    = f.file_field :icon, class: 'form-control', id: 'registration-user-icon'
+    -# = f.file_field :icon, multiple: true, 'data-direct-upload': true, class: 'form-control', id: 'registration-user-icon'
+    = f.hidden_field :icon_cache, id: 'registration-user-icon-cache'
+    = f.hidden_field :icon_x, id: 'registration-user-icon-x'
+    = f.hidden_field :icon_y, id: 'registration-user-icon-y'
+    = f.hidden_field :icon_width, id: 'registration-user-icon-width'
+    = f.hidden_field :icon_height, id: 'registration-user-icon-height'
+    = f.check_box :remove_icon
+    = f.label :remove_icon
   .form-group
     = f.label :email
     = f.email_field :email, autocomplete: 'email', class: 'form-control'
@@ -20,7 +33,7 @@
     = f.password_field :current_password, autocomplete: 'current-password', class: 'form-control'
     %small.form-text.text-muted= t('.we_need_your_current_password_to_confirm_your_changes')
   .form-group
-    = f.submit t('.update'), class: 'btn btn-primary'
+    = f.submit t('.update'), class: 'btn btn-primary', id: 'registration-user-submit-button'
 %p
   = t('.unhappy')
   ? #{link_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure') }, method: :delete}.

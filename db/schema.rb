@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_09_084402) do
+ActiveRecord::Schema.define(version: 2018_09_29_100047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,14 +29,14 @@ ActiveRecord::Schema.define(version: 2018_09_09_084402) do
     t.index ["follower_type", "follower_id"], name: "index_follows_on_follower_type_and_follower_id"
   end
 
-  create_table "replies", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "tweet_id"
-    t.text "content", null: false
+  create_table "relationships", force: :cascade do |t|
+    t.bigint "followee_id"
+    t.bigint "follower_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["tweet_id"], name: "index_replies_on_tweet_id"
-    t.index ["user_id"], name: "index_replies_on_user_id"
+    t.index ["followee_id", "follower_id"], name: "index_relationships_on_followee_id_and_follower_id", unique: true
+    t.index ["followee_id"], name: "index_relationships_on_followee_id"
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
   create_table "retweets", force: :cascade do |t|
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 2018_09_09_084402) do
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "parent_tweet_id"
+    t.index ["parent_tweet_id"], name: "index_tweets_on_parent_tweet_id"
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
@@ -66,14 +68,16 @@ ActiveRecord::Schema.define(version: 2018_09_09_084402) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "icon"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "replies", "tweets"
-  add_foreign_key "replies", "users"
+  add_foreign_key "relationships", "users", column: "followee_id"
+  add_foreign_key "relationships", "users", column: "follower_id"
   add_foreign_key "retweets", "tweets"
   add_foreign_key "retweets", "users"
+  add_foreign_key "tweets", "tweets", column: "parent_tweet_id"
   add_foreign_key "tweets", "users"
 end

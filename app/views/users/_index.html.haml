@@ -1,5 +1,7 @@
-- @users.each do |user|
+- @users.order(:name).each do |user|
   .user-record
-    %h4.card-header= user.name
+    %h4.card-header
+      = render 'layouts/user_icon', icon: user.icon.thumb
+      = user.name
     %a{ href: user_path(user), id: "#{user.id}", method: :get }
 = paginate @users
