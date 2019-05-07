@@ -1,10 +1,25 @@
 require_relative 'boot'
 
+# Load env vars before Rails is loaded
+require 'aws-sdk-secretsmanager'
+
+# secrets_id = ENV['AWS_SECRET_PREFIX'] || "tubtter-#{ENV['RAILS_ENV']}"
+secrets_id = "tubtter-#{ENV['RAILS_ENV']}"
+client = Aws::SecretsManager::Client.new
+secrets = client.get_secret_value(secret_id: "#{secrets_id}").secret_string
+
+JSON.parse(secrets).each_pair do |key, value|
+  ENV["#{key}".underscore.upcase] = value
+end
+
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+
+puts "username=#{ENV['USERNAME']}"
+puts "passowrd=#{ENV['PASSWORD']}"
 
 module Tubtter
   class Application < Rails::Application
