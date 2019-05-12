@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-# secrets_id = ENV['AWS_SECRET_ID'] || "tubtter-#{ENV['RAILS_ENV']}"
+# secrets_id = ENV['AWS_SECRET_ID'] || "tubtter/#{ENV['RAILS_ENV']}"
 # client = Aws::SecretsManager::Client.new
 # secrets = client.get_secret_value(secret_id: "#{secrets_id}").secret_string
 #
