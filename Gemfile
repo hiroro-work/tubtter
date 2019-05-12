@@ -28,6 +28,7 @@ gem 'mini_magick'
 gem 'hanmoto'
 gem 'dotenv-rails', require: 'dotenv/rails-now', groups: [:development, :test]
 gem 'aws-sdk-secretsmanager'
+gem 'aws-ssm-env'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
